@@ -1,0 +1,60 @@
+<div class="container">
+    <h3 style="text-align:center">
+        Evaluation Feedback
+    </h3>
+    <a mat-button routerLink="/dashboard" style="float: right;">Dahboard</a>
+    <form [formGroup]="feedbackForm">
+        <div class="form-group">
+            <label for="title">Evaluation Title : <span>{{evaluationTitle}}</span></label>
+        </div>
+        <div class="form-group">
+            <label for="consultant">Consultant : <span>{{consultantEmail}}</span></label>
+        </div>
+
+        <div class="form-group">
+            <label for="technology">Top Level Technology Areas</label>
+            <div
+                *ngIf="feedbackForm.controls['technology'].errors && (feedbackForm.controls['technology'].touched || feedbackForm.controls['technology'].dirty)">
+                <div class="error-msg" *ngIf="feedbackForm.controls['technology'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+            </div>
+            <select class="form-control" name="technology" id="technology" formControlName="technology"
+                (ngModelChange)="onTechnologyChange($event)">
+                <option value="">Select Technology</option>
+                <option *ngFor="let tech of technologies" [ngValue]="tech.techId">{{tech.name}}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="isRecommendation">
+            <label for="recommendation">Recommendation<span class="lblError">*</span></label>
+            <input class="form-control" name="recommendation" id="recommendation" type="text"
+                formControlName="recommendation">
+        </div>
+        <div class="form-group">
+            <label for="subArea">Sub Areas</label>
+            <div
+                *ngIf="feedbackForm.controls['subArea'].errors && (feedbackForm.controls['subArea'].touched || feedbackForm.controls['subArea'].dirty)">
+                <div class="error-msg" *ngIf="feedbackForm.controls['subArea'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+            </div>
+            <select class="form-control" name="subArea" id="subArea" formControlName="subArea" (ngModelChange)="onTechsubAreaChange($event)">
+                <option value="">Select Sub Area</option>
+                <option *ngFor="let tech of techSubAreaList" [ngValue]="tech.subTechId">{{tech.name}}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="isFeedback">
+            <label for="feedback">Feedback <span class="lblError">*</span></label>
+            <input class="form-control" name="feedback" id="feedback" type="text" formControlName="feedback">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" style="width: 15%" (click)="AddEvaluationFeedback()">
+                Add Feedback
+            </button>
+        </div>
+    </form>
+
+    <!-- <h2 *ngIf="successMessage">{{successMessage}}</h2>
+    <h2 *ngIf="errorMessage">{{errorMessage}}</h2> -->
+</div>

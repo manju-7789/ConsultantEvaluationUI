@@ -1,0 +1,72 @@
+<div class="container">
+    <h3 style="text-align:center">
+        Create Evaluation Process
+    </h3>
+    <a mat-button routerLink="/dashboard" style="float: right;">Dahboard</a>
+    <form [formGroup]="evaluationForm">
+        <div class="form-group">
+            <label for="title">Evaluation Title <span class="lblError">*</span></label>
+            <div
+                *ngIf="evaluationForm.controls['title'].errors && (evaluationForm.controls['title'].touched || evaluationForm.controls['title'].dirty)">
+                <div class="error-msg" *ngIf="evaluationForm.controls['title'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+            </div>
+            <input class="form-control" name="title" id="title" type="text" formControlName="title">
+        </div>
+        <div class="form-group">
+            <label for="consultant">Consultant <span class="lblError">*</span></label>
+            <div
+                *ngIf="evaluationForm.controls['consultant'].errors && (evaluationForm.controls['consultant'].touched || evaluationForm.controls['consultant'].dirty)">
+                <div class="error-msg" *ngIf="evaluationForm.controls['consultant'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+                <div class="error-msg" *ngIf="evaluationForm.controls['consultant'].errors.pattern">* Invalid email address</div>
+            </div>
+            <input class="form-control" name="consultant" id="consultant" type="text" formControlName="consultant">
+        </div>
+        <div class="form-group">
+            <label for="evaluators">Evaluators <span class="lblError">*</span></label>
+            <div
+                *ngIf="evaluationForm.controls['evaluators'].errors && (evaluationForm.controls['evaluators'].touched || evaluationForm.controls['evaluators'].dirty)">
+                <div class="error-msg" *ngIf="evaluationForm.controls['evaluators'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+                <div class="error-msg" *ngIf="evaluationForm.controls['evaluators'].errors.pattern">* Invalid email address</div>
+            </div>
+            <input class="form-control" name="evaluators" id="evaluators" type="text" formControlName="evaluators">
+        </div>
+        <div class="form-group">
+            <label for="owner">Owner <span class="lblError">*</span></label>
+            <div
+                *ngIf="evaluationForm.controls['owner'].errors && (evaluationForm.controls['owner'].touched || evaluationForm.controls['owner'].dirty)">
+                <div class="error-msg" *ngIf="evaluationForm.controls['owner'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+                <div class="error-msg" *ngIf="evaluationForm.controls['owner'].errors.pattern">* Invalid email address</div>
+            </div>
+            <input class="form-control" name="owner" id="owner" type="text" formControlName="owner">
+        </div>
+        <div class="form-group">
+            <label for="technology">Top Level Technology Areas <span class="lblError">*</span></label>
+            <div
+                *ngIf="evaluationForm.controls['technology'].errors && (evaluationForm.controls['technology'].touched || evaluationForm.controls['technology'].dirty)">
+                <div class="error-msg" *ngIf="evaluationForm.controls['technology'].errors.required">
+                    <div>* This field is required</div>
+                </div>
+            </div>
+            <select class="form-control" name="technology" id="technology" formControlName="technology">
+                <option value="">Select Technology</option>
+                <option *ngFor="let tech of technologies" [ngValue]="tech.techId">{{tech.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" style="width: 15%" (click)="addEvaluation()">
+                Add Evaluation
+            </button>
+        </div>
+    </form>
+
+    <h2 *ngIf="successMessage">{{successMessage}}</h2>
+    <h2 *ngIf="errorMessage">{{errorMessage}}</h2>
+</div>

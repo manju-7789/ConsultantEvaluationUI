@@ -1,0 +1,30 @@
+<h3 style="text-align:center">Evaluation Process Dashboard</h3>
+
+<a mat-button routerLink="/add-evaluation" style="float: right;">Add Evaluation</a>
+<br/>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th scope="col">Owner</th>
+    <th scope="col">Cosultant</th>
+    <!-- <th scope="col">Status</th> -->
+    <th scope="col">Evaluators</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of evaluationList; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ item.title }}
+    </td>
+    <td>{{item.owner}}</td>
+    <td>{{item.consultant}}</td>
+    <!-- <td>{{item.status}}</td> -->
+    <td>{{item.evaluatorEmails}}</td>
+    <td><button type="button" class="btn btn-primary" (click)="evaluationFeedback(item.evaluationId)">Feedback</button></td>
+  </tr>
+  </tbody>
+</table>
